@@ -1,6 +1,6 @@
 # My-cheatsheet
-### 26 день учу js и вот большинство более менее норм работ собраны в этой репозитории.
+### Day 26. I am learning JavaScript, in this repository there are many different and interesting works collected by me during my learning.
 
-#### Последнее обновление: 30.10.22
+#### Last update: 30.10.22
 
-#### На данный момент изучается более подробная работа с юнит тестами.
+#### At the moment I am studying in detail unit tests.
