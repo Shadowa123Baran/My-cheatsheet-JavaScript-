@@ -8,7 +8,7 @@
 #### npm install -D @babel/core @babel-preset-env
 ### The command to show the result is:
 #### jest
-##### Before that, you need to download node.js
+### Before that, you need to download node.js
 
 #### Last update: 30.10.22
 
