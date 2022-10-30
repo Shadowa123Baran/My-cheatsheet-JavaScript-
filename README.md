@@ -5,4 +5,4 @@
 
 #### Last update: 30.10.22
 
-#### At the moment I am studying in detail unit tests.
+#### At the moment I am learning in detail unit tests.
