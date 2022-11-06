@@ -365,4 +365,122 @@ console.log(flating)
 
 // ↑↑↑Из объекта в массив↑↑↑
 
+let message = 'Just learn it'
+
+const createMessage = () => {
+    const sendMessage = (name) => {
+        let sender = 'John'
+       console.log(`${name}, ${message}! Your ${sender}.`)
+    }
+    const setMessage = (text) => {
+        message = text
+    }
+    return {
+        sendMessage,
+        setMessage,
+    }
+}
+
+createMessage().setMessage('Good job')
+createMessage().sendMessage('Ann') 
+
+// ↑↑↑ Хз че это, я забыл(не работает как надо, в 411 строчке верный ответ) ↑↑↑
+
+// Сама функция
+// let count = 0 - так оно все время не влияет с makecounter
+const makeCounter = () => {
+    let count = 0 // вот так уже влияет
+    return function(){ // 
+        return count++ // - только на этом этапе выводиться
+    }
+}
+
+// Независимые штучки
+const counter1 = makeCounter() 
+const counter2 = makeCounter() 
+
+// Коунтер крутой
+console.log(counter1()); 
+console.log(counter1()); 
+console.log(counter2()); 
+console.log(counter1()); 
+console.log(counter2()); 
+
+// ↑↑↑ Пример замыкания, создание независимых счетчиков. Из за ++ после слова сначало выоводиться до этого но содержит на 1 больше, то есть выводит 1, а на самом деле там 2 и при следующим консоль логе будет выводить 2, но хотя там 3. Из-за того что переменная count внутри функции, то она работает только на ней. ↑↑↑
+
+let message;
+let sender;
+
+const createMessage = () => {
+    function sendMessage (name) {
+       console.log(`${name}, ${message}! Your ${sender}.`)
+    }
+    function setMessage (text) {
+        message = text
+    }
+    function setSender (text) {
+        sender = text
+    }
+    return {
+        sendMessage,
+        setMessage,
+        setSender,
+    }
+}
+
+createMessage().setMessage('Good job')
+createMessage().setSender('Tom')
+createMessage().sendMessage('Ann')
+
+// ↑↑↑ Штука, с помощью, который можно менять переменные вводя текст в 3 функции и получаю 1 крутую! ↑↑↑
+
+user = {
+    lastname: 'John',
+    firstname: 'Doe',
+    getFullName() {
+        console.log(`${this.lastname} ${this.firstname}`)
+    }
+}
+
+user.getFullName() // работает
+const func = user.getFullName.bind(user) // работает
+// const func = user.getFullName // не работает
+func()
+
+// ↑↑↑ Вот эта штучка берет lastname и firstname и соединяет в fullName.
+
+const callbackPrompt = {
+    message: 'How old are you?',
+    showPrompt() {
+        const number = prompt(this.message);
+        console.log(number);
+    },
+    showDeferredPrompt(ms) {
+        setTimeout(this.showPrompt.bind(this), ms);
+    },
+}
+
+callbackPrompt.showDeferredPrompt(1000)
+
+// ↑↑↑ Вот эта штучка, выдает промт спустя 1 секунд. Когда вписываешь туда текст он выводиться к консоль. ↑↑↑
+
+function defer (func, ms) {
+    return function() {
+        setTimeout(() => func.call(this), ms)
+    }
+}
+
+const user = {
+    name: 'Tom',
+    sayHi(){
+        console.log( `Hello, I am ${this.name}`)
+    },
+}
+
+const deffered = defer(user.sayHi, 1000)
+
+deffered.call({ name: 'Ben' })
+
+// ↑↑↑ Вот эта штучка, выводить в консоль текст спустя 1 секунду, также тут меняется name. ↑↑↑
+
 */

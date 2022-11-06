@@ -1,4 +1,3 @@
-/*
 import getSum, {getSquaredArray, getOddNumbers} from './app.js'
 
 // ↑↑↑getSu, это третья функция, которая идет по дефолту и ей присваивается имя только при импорте. и 2 определенные функции↑↑↑
@@ -37,4 +36,3 @@ it ('test6', () => {
     expect(result).toEqual(3)
 })
 
-*/
