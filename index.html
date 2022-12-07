@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -12,5 +13,44 @@
         <button type="button" name="generate" onclick="GenerateArray(1);">Generate array</button>
       </form>
       <div id="array"></div>
+      <div class="container">
+		<h1><a style="text-decoration: none; color: #f1c40f; margin-left: 0.25rem;" href="" onclick="location.reload();">CALCULATOR</a></h1 >
+			<div class="calculator">
+            <input id="but" type="text" name="screen" id="answer" readonly>
+			<table>
+				<tr>
+					<td><button>(</button></td>
+					<td><button>)</button></td>
+					<td><button style="background-color: #f01600; font-weight: bold; color: #ecf0f1;">C</button></td>
+					<td><button>%</button></td>
+				</tr>
+				<tr>
+					<td><button>7</button></td>
+					<td><button>8</button></td>
+					<td><button>9</button></td>
+					<td><button>X</button></td>
+				</tr>
+				<tr>
+					<td><button>4</button></td>
+					<td><button>5</button></td>
+					<td><button>6</button></td>
+					<td><button>-</button></td>
+				</tr>
+				<tr>
+					<td><button id="text" onclick="text1()" type="button">1</button></td>
+					<td><button>2</button></td>
+					<td><button>3</button></td>
+					<td><button>+</button></td>
+				</tr>
+				<tr>
+					<td><button>0</button></td>
+					<td><button style="font-weight: bold;">.</button></td>
+					<td><button>/</button></td>
+					<td><button style="background-color: #25db72; font-weight: bold; color: #ecf0f1;">=</button></td>
+				</tr>
+			</table>
+        </div>
+        </div>
 </body>
 </html>
+
