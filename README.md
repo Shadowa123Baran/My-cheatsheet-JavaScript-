@@ -10,6 +10,6 @@
 #### jest
 ### Before that, you need to download node.js
 
-#### Last update: 19.11.22
+#### Last update: 07.12.22
 
 #### At the moment I am learning in detail classes in javascript.
