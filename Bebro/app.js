@@ -479,8 +479,537 @@ const user = {
 
 const deffered = defer(user.sayHi, 1000)
 
-deffered.call({ name: 'Ben' })
+deffered.call({ name: 'Ben' }) 
 
 // ↑↑↑ Вот эта штучка, выводить в консоль текст спустя 1 секунду, также тут меняется name. ↑↑↑
 
+const event = {
+    message: `Welcome to the party.`,
+    guests: [
+        { name: 'John', age: 18, email: 'john@server.com' },
+        { name: 'Ben', age: 35, email: 'ben@server.com' },
+        { name: 'Tom', age: 16, email: 'tom@server.com' },
+    ],
+    getInvitations() {
+        return this.guests
+            .filter(({age}) => age >= 18)
+            .map(({name, email}) => ({
+                text: `Dear ${name}! ${this.message}`,
+                email
+            }))
+    }
+}
+
+console.log(event.getInvitations())
+
+// ↑↑↑ Тем у кого возраст 18 или больше, то выводиться 497 и 498 строчка ↑↑↑
+
+const wallet = {
+    getMax() {
+        return Math.max.apply(null, [1, 2, 3, -6]);
+    },
+    getMin() {
+        return Math.min.apply(null, [1, 2, 3, -6]);
+    },
+};
+
+console.log(wallet.getMax())
+console.log(wallet.getMin())
+
+// ↑↑↑ ущнается самое выксокое и маленькое число в массиве ↑↑↑
+
+function sumOfSquares() {
+    return [].map.call(arguments, num => num * num)
+        .reduce((acc, num) => acc + num, 0 );
+}
+
+
+console.log(sumOfSquares(1, 2, 3, 4, 5))
+
+// ↑↑↑ Функция решает независимо сколько цифр возращает сумму квадратов ↑↑↑
+
+function getFullName (name) {
+    if (name === 'Витя') {
+        console.log('Хуиитя')
+    }
+    else if (name === 'Айрат') {
+        console.log('Хуийрат')
+    }
+    return
+}
+
+getFullName('Витя')
+getFullName('Айрат')
+
+
+
+const getFullName = {
+    message: 'Ваше имя:',
+    showPrompt() {
+        const name = prompt(this.message);
+        const newName = name.toLowerCase()
+        if (newName === 'витя') {
+            console.log('Хуиитя')
+        }
+        else if (newName === 'айрат') {
+            console.log('Хуийрат')
+        }
+        else if (newName === 'олег') {
+            console.log('Хуиолег')
+        }
+        else if (newName === 'никита') {
+            console.log('Хуииникита')
+        }
+        else if (newName === 'виталя') {
+            console.log('Хуийвиталик')
+        }
+        else if (newName === 'толик') {
+            console.log('Хуитолик')
+        }
+        else if (newName === 'максим') {
+            console.log('Хуиймаксим')
+        }
+        else if (newName === 'нурлан') {
+            console.log('Хуийнурлан')
+        }
+        else if (newName === 'ваня') {
+            console.log('Хуийваня')
+        }
+        else {
+            console.log(name)
+        }
+    },
+}
+
+const func = getFullName.showPrompt.bind(getFullName)
+
+func() 
+
+// ↑↑↑ Крутой обзыватель имен ↑↑↑ 
+
+const vehicle = {
+    move() {
+        console.log(`${this.name} ${'is moving'}`)
+    },
+    stop() {
+        console.log(`${this.name} ${'stopped'}`)
+    },
+}
+
+const ship = {
+    name: 'Dracon',
+    liftAnchorUp() {
+        console.log(`${this.name} lifting anchor up`);
+    },
+    liftAnchorDown() {
+        console.log(`${this.name}lifting anchor down`);
+    },
+    startMachine() {
+        this.liftAnchorUp();
+        this.move();
+    },
+    stopMachine() {
+        this.stop();
+        this.liftAnchorDown();
+    },
+    __proto__: vehicle
+}
+
+ship.startMachine()
+
+// ↑↑↑ Кораблик, который унаследовал поведению средствам передвижения ↑↑↑ 
+
+const str = 'Privet ya leha';
+const output = new SpeechSynthesisUtterance(str);
+window.speechSynthesis.speak(output);
+
+// ↑↑↑ Туды сюды говорит он ↑↑↑ 
+
+const ship = {
+    name: 'Dracon',
+    liftAnchorUp() {
+        console.log(`${this.name} lifting anchor up`);
+    },
+    liftAnchorDown() {
+        console.log(`${this.name}lifting anchor down`);
+    },
+    startMachine() {
+        this.liftAnchorUp();
+        this.move();
+    },
+    stopMachine() {
+        this.stop();
+        this.liftAnchorDown();
+    },
+}
+
+// ↑↑↑ Корабль, который имеет имя и способен опускать якорь и двигаться, также поднимать и останавливаться. ↑↑↑
+
+function getOwnProps (obj) {
+    for(let prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            console.log(prop)
+        }
+    }
+    return 
+}
+
+getOwnProps(ship)
+
+// ↑↑↑ Выводит из объекта то, что было введено без прототипа ↑↑↑
+
+function User(name, age) {
+    this.name = name
+    this.age = age
+}
+
+User.prototype.sayHi = function() {
+    console.log(`Hi, I am ${this.name}`)
+}
+
+User.prototype.requestNewPhoto = function() {
+    console.log(`New photo request was sent for ${this.name}`)
+}
+
+User.prototype.setAge = function(value) {
+    if (value < 0) {
+        console.log('New photo was not requested')
+    }
+    this.age = value;
+    if (value >= 25) {
+        this.requestNewPhoto()
+    }
+    return value
+}
+
+const user1 = new User('Tom', 28)
+const user2 = new User('Ben', 31)
+const user3 = new User('Jack', 26)
+
+console.log(user1)
+//
+user1.sayHi()
+user2.sayHi()
+//
+user1.requestNewPhoto()
+console.log(user2)
+user2.setAge(31)
+user3.setAge(-1)
+//
+
+// ↑↑↑ через New, тип прочитай и все норм будет. ↑↑↑
+const object = {
+    firstName: 'Alex',
+    lastName: 'Burudinskiy',
+    age: 17,
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    },
+    set fullName(value) {
+        const [firstName, lastName] = value.split(' ')
+        this.firstName = firstName
+        this.lastName = lastName
+    }
+}
+
+const func1 = object.fullName
+
+console.log(func1)
+
+object.fullName = 'Oleg Familitskiy'
+
+console.log(object.fullName)
+
+// ↑↑↑ 1. Без вводимого слова выводить фуллнаме 2. Вводить вводимоеное слово и тебе выдает его только уже через сплит в массиве тип. ↑↑↑ 
+
+class User {
+    constructor (name, age) {
+        this.name = name
+        this.age = age
+    }
+    sayHi() {
+        console.log(`Hi, I am ${this.name}`)
+    }
+    requestNewPhoto() {
+        console.log(`New photo request was sent for ${this.name}`)
+    }
+    setAge(newAge) {
+        if (newAge < 0) {
+            return false
+        }
+        this.age = newAge
+        if (newAge >= 25) {
+            this.requestNewPhoto()
+        }
+        if (newAge > 0) {
+            return newAge
+        }
+    }
+
+    static createEmpty() {
+        return new User('', null)
+    }
+
+}
+
+const user1 = new User('Arik', 13)
+console.log(User.createEmpty())
+
+// ↑↑↑ Все тоже самое как в 661 строке, только добавляется статик функция, которая создает сразу же чела где будет везде пустота и активируется короч понял ты да. ↑↑↑
+
+class Vehicle {
+    constructor (name, numberOfWheels) {
+        this.name = name
+        this.numberOfWheels = numberOfWheels
+    }
+
+    move() {
+        console.log(`${this.name} is moving`)
+    }
+
+    stop() {
+        console.log(`${this.name} stopped`)
+    }
+}
+
+class Ship extends Vehicle {
+    constructor(name, numberOfWheels, maxSpeed) {
+        super(name, numberOfWheels)
+        this.maxSpeed = maxSpeed
+    }
+
+    move() {
+        console.log(`${this.name} lifting anchor up `)
+        super.move()
+    }
+
+    stop() {
+        super.stop()
+        console.log(`${this.name} lifting anchor down `)
+    }
+}
+
+const ship1 = new Ship('Titanik', false, 7)
+
+console.log(ship1)
+console.log(ship1.move())
+console.log(ship1.stop())
+
+// ↑↑↑ Кораблик, который туда сюда тип с помощью классов, там super сть из-за того чтобы extends Vehicle ну и да. ↑↑↑
+
+class Wallet {
+    constructor() {
+        this.balance = 0
+    }
+    getBalance() {
+        console.log(this.balance)
+    }
+    deposit(amountPlus) {
+        this.balance += amountPlus
+        console.log(`На ваш банковский счет были внесены ${amountPlus} и ваш счет составляет ${this.balance}.`)
+    }
+    withdraw(amountMines) {
+        if (amountMines > this.balance) {
+            console.log('На данный адрес был вызван ФБР, ожидайте.')
+            return 
+        }
+        if (amountMines <= this.balance) {
+            this.balance -= amountMines
+            console.log(`С вашего банковского счета было снято ${amountMines} и ваш счет составляет ${this.balance}`)
+        }
+    }
+}
+
+
+const wallet1 = new Wallet()
+const wallet2 = new Wallet()
+
+console.log(wallet1.deposit(50))
+console.log(wallet1.deposit(70))
+console.log(wallet1.withdraw(30))
+console.log(wallet1.withdraw(1909))
+
+console.log(wallet1.getBalance())
+
+console.log(wallet2.getBalance())
+
+// ↑↑↑ Это кошелек, может показывать счет, создавать счет, снимать деньги со счета, пополнять счет, при неверном выводе средств вызывается ФБР и заканчивается действие if. ↑↑↑
+
+class Worker {
+    constructor (name, surname, rate, days) {
+        this.name = name
+        this.surname = surname
+        this.rate = rate
+        this.days = days
+    }
+    getSalary() {
+        console.log(this.rate * this.days)
+    }
+}
+
+const worker = new Worker('Иван', 'Иванов', 10, 31);
+
+console.log(worker.name); //выведет 'Иван'
+console.log(worker.surname); //выведет 'Иванов'
+console.log(worker.rate); //выведет 10
+console.log(worker.days); //выведет 31
+console.log(worker.getSalary()); //выведет 310 - то есть 10*31
+
+class Worker {
+    constructor(name, surname, rate, days) {
+        this._rate = rate;
+        this._days = days;
+        this._name = name;
+        this._surname = surname;
+    }
+    get name() { 
+        return this._name; 
+    }
+    get surname() { 
+        return this._surname; 
+    }
+    get rate() { 
+        return this._rate; 
+    }
+    setRate(value) { 
+        return this._rate = value
+    }
+    get days() { 
+        return this._days; 
+    }
+    setDays(value) { 
+        return this._days = value
+    }
+    getSalary() {
+        return this._rate * this._days; 
+    }
+}
+ 
+let worker = new Worker("Иван", "Иванович", 10, 31);
+
+console.log(worker.name)
+console.log(worker.rate); //выведет 10
+console.log(worker.days); //выведет 31
+console.log(worker.getSalary() ); //выведет 310 - то есть 10*31
+
+//Теперь используем сеттер:
+worker.setRate(20); //увеличим ставку
+worker.setDays(10); //уменьшим дни
+console.log(worker.getSalary()); //выведет 200 - то есть 20*10
+
+class MyString {
+    constructor () {
+    }
+    reverse(text) {
+        let a = ''
+        for (let i = text.length - 1; i >= 0; i--) {
+            a += text[i]
+        }
+        return a
+    }
+    ucFirst(text) {
+        return text[0].toUpperCase() + text.slice(1)
+    }
+    ucWords(str) {
+        let arr = str.split(' ');
+        let strArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            let a = arr[i];
+            let newStr = a[0].toUpperCase() + a.slice(1);
+            strArr.push(newStr);
+        }
+        return strArr.join(' ')
+    }
+}
+
+
+const str = new MyString();
+
+console.log(str.reverse('abcde')); //выведет 'edcba'
+console.log(str.ucFirst('abcde')); //выведет 'Abcde'
+console.log(str.ucWords('abcde abcde abcde')); //выведет 'Abcde Abcde Abcde'
+
+class Validator {
+    constructor () {
+    }
+    isEmail(text) {
+        let result = 0
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === '@') {
+                result++
+            }
+            if (text[i] === '.') {
+                result++ 
+            }
+        }
+        if (result === 2) {
+            return true
+        }
+
+        if (result < 2) {
+            return false
+        }
+    }
+    isDomain (text) {
+        let result = 0
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === '.') {
+                result++ 
+            }
+        }
+        if (result === 1) {
+            return true
+        }
+        if (result !== 1) {
+            return false
+        }
+    }
+    isDate(text) {
+        const match = text.match(/[0-9]{2}\.[0-9]{2}\.[0-9]{4}/)
+        return match === null ? false : true
+    }
+    isPhone(text) {
+        let phone = text.match(/[+7] \([0-9]{3}\)\ [0-9]{3} [0-9]{2} [0-9]{2}/);
+        return phone === null ? false : true;
+    }
+}
+
+const validator = new Validator();
+
+console.log(validator.isEmail('phphtml@mail.ru'));
+console.log(validator.isEmail('phphtmlmail.ru'));
+console.log(validator.isEmail('phphtmlmailru'));
+console.log(validator.isDomain('phphtml.net'));
+console.log(validator.isDate('12.05.2020'));
+console.log(validator.isPhone('+7 (907) 817 68 92')); //тут можете формат своей страны
+
 */
+
+class User {
+	constructor(name, surname) {
+		this.name = name;
+		this.surname = surname;
+	}
+}
+class Student extends User {
+    constructor (name, surname, year){
+        super(name, surname)
+        this.year = year
+    }
+
+    getFullName() {
+        return this.name + ' ' + this.surname
+    }
+
+    getCourse() {
+        return 2022 - this.year
+    }
+}
+
+const student = new Student('Иван', 'Иванов', 2019);
+
+console.log(student.name); //выведет 'Иван'
+console.log(student.surname); //выведет 'Иванов'
+console.log(student.year);
+console.log(student.getFullName()); //выведет 'Иван Иванов'
+console.log(student.getCourse()); //выведет 2019console.log(worker.getCourse()); //выведет 3 - третий курс, так как текущий год 2022
