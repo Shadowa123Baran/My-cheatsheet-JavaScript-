@@ -12,4 +12,4 @@
 
 #### Last update: 19.12.22
 
-#### At the moment I am learning in detail classes in javascript.
+#### At the moment I am learning in detail date and time controls in javascript.
