@@ -933,23 +933,16 @@ class Validator {
     constructor () {
     }
     isEmail(text) {
-        let result = 0
-        for (let i = 0; i < text.length; i++) {
-            if (text[i] === '@') {
-                result++
-            }
-            if (text[i] === '.') {
-                result++ 
-            }
-        }
-        if (result === 2) {
-            return true
-        }
-
-        if (result < 2) {
-            return false
+    const beb = text.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,:;\s@\"]+\.{0,1})+[^<>()\.,;:\s@\"]{2,})$/
+    )
+        if (beb) {
+            console.log(true)
+        } else {
+            console.log(false)
         }
     }
+    
     isDomain (text) {
         let result = 0
         for (let i = 0; i < text.length; i++) {
@@ -983,8 +976,6 @@ console.log(validator.isDomain('phphtml.net'));
 console.log(validator.isDate('12.05.2020'));
 console.log(validator.isPhone('+7 (907) 817 68 92')); //тут можете формат своей страны
 
-*/
-
 class User {
 	constructor(name, surname) {
 		this.name = name;
@@ -1013,3 +1004,71 @@ console.log(student.surname); //выведет 'Иванов'
 console.log(student.year);
 console.log(student.getFullName()); //выведет 'Иван Иванов'
 console.log(student.getCourse()); //выведет 2019console.log(worker.getCourse()); //выведет 3 - третий курс, так как текущий год 2022
+
+function generateHashtag (str) {
+    let tag = str.trim().split(' ')
+    let result = []
+    if (str === '' || str.length >= 140 || str === ' ') {
+        return false
+    }
+    else {
+        for (let i = 0; i < tag.length; i++) {
+            let a = tag[i]
+            let newstr = a[0].toUpperCase() + a.slice(1)
+            result.push(newstr)
+        } 
+        return '#'.concat(result.join(''))
+    }
+}
+generateHashtag('  Hello World   ')
+generateHashtag(' ')
+generateHashtag('Codewars')
+generateHashtag('Hello world')
+
+for(let i = 1; i <= 100; i++) {
+    console.log(i)
+}
+
+const validateEmail = (email) => {
+    const beb = email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,:;\s@\"]+\.{0,1})+[^<>()\.,;:\s@\"]{3,65})$/)
+
+    if (beb) {
+        console.log(true)
+    } else {
+        console.log(false)
+    }
+    }
+    
+
+validateEmail('ufns3002@gmail.com')
+
+const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'St'];
+
+const dayOfWeek = (dates, days) => {
+    const date = new Date(dates).getDate()
+    const newDate = new Date(date).setDate(date  + days)
+    return daysOfWeek[new Date(newDate).getDay()]
+}
+
+const result = dayOfWeek(new Date(2022, 12, 14), 1)
+console.log(result)
+console.log(new Date(2022, 11, 12, 16, 30, 0).getDay())
+*/
+const pochtiData = Intl.DateTimeFormat('en', {
+    timeZone: 'UTC',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+})
+
+const getGreenwichTime = (date) => pochtiData.format(date)
+
+console.log(getGreenwichTime(new Date()))
+
+const time = document.getElementById('bedro')
+
+time.innerHTML = `<span class = 'debro'>Сейчас у вас ${getGreenwichTime(new Date())} по Гринвичу</span>`
+
+
+
+
