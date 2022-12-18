@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    background-color: rgb(23, 24, 37);
+}
+
+.result__input{
+    border: none;
+    outline: none;
+    background-color: rgba(52, 73, 94, 0.5);
+    color: white;
+    font-weight: bold;
+    direction: rtl;
+    border-radius: 0.5rem;
+}
+.calculator{
+    text-align: center;
+}
+
+.btn{
+    width: 20vw;
+    height: 10vh;
+    padding: 0.5rem 0;
+    margin: 0.25vmax;
+    font-size: 2rem;
+}
+
+button{
+    border: none;
+    background-color: white;
+    width: 20vw;
+    height: 10vh;
+    padding: 0.5rem 0;
+    margin: 0.25vmax;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    -moz-transition: all ease 0.5s;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -o-transition: all ease 0.5s;
+}
+
+.container {
+    margin: auto;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.calculator {
+    padding: 0.25rem;
+    display: inline-block;
+    text-align: center;
+}
+
+.debro {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input{
+    font-size: 3rem;
+    width: 78vw;
+    direction: rtl;
+    color: white;
+    background-color: rgba(52, 73, 94, 0.5);
+    border: none;
+    outline: none;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+}
+
+button:active {
+    transform: scale(0.95);
+    /* Scaling button to 0.98 to its original size */
+    /* Lowering the shadow */
+}
+
+table{
+    margin: auto;
+}
