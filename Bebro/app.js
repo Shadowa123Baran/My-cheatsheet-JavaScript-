@@ -1053,7 +1053,7 @@ const dayOfWeek = (dates, days) => {
 const result = dayOfWeek(new Date(2022, 12, 14), 1)
 console.log(result)
 console.log(new Date(2022, 11, 12, 16, 30, 0).getDay())
-*/
+
 const pochtiData = Intl.DateTimeFormat('en', {
     timeZone: 'UTC',
     hour: '2-digit',
@@ -1069,6 +1069,243 @@ const time = document.getElementById('bedro')
 
 time.innerHTML = `<span class = 'debro'>Сейчас у вас ${getGreenwichTime(new Date())} по Гринвичу</span>`
 
+const valueOfFirstNumber = document.getElementById("num1")
+const valueOfSecondNumber = document.getElementById("num2")
+const resultElem = document.getElementById("result")
+let operation = ''
+
+function calculator() {
+    let result = [];
+
+    if (operation === '+') {
+        result.push(Number(valueOfFirstNumber.value) + Number(valueOfSecondNumber.value))
+    }
+
+    if (operation === '-') {
+        result.push(Number(valueOfFirstNumber.value) - Number(valueOfSecondNumber.value))
+    }
+
+    if (operation === '*') {
+        result.push(Number(valueOfFirstNumber.value) * Number(valueOfSecondNumber.value))
+    }
+
+    if (operation === '/') {
+        result.push(Number(valueOfFirstNumber.value) / Number(valueOfSecondNumber.value))
+    }
+
+    resultElem.innerHTML = result;
+}
+
+const nextResult = document.querySelector('#nextResult')
+const nextInput = document.querySelector('#bebri')
+function beb (value) {
+    nextResult.innerHTML = value
+}
+
+nextInput.addEventListener('keydown', event => {
+if (event.key.match(/[0-9%\/*\-+\(\)]/g)) {
+        nextResult.innerHTML = event.key
+    }
+})
+
+nextInput.addEventListener('input', beb(5+5))
+
+const getLocalStorageData = () =>
+    Object.entries(localStorage)
+        .reduce((acc, [key, value]) => {
+            let resultValue;
+            try{
+                resultValue = JSON.parse(value)
+            }
+
+            catch(e) {
+                resultValue = value
+            }
+            return {
+                ...acc,
+                [key]: resultValue,
+            };
+        }, {});
+
+console.log(getLocalStorageData())
+
+function calc(value) {
+    let resultInCalc = value;
+    const calculator = {
+        add(value) {
+            resultInCalc += value
+            return calculator
+        },
+
+        subtract(value) {
+            resultInCalc -= value
+            return calculator
+        },
+
+        mult(value) {
+            resultInCalc *= value
+            return calculator
+        },
+
+        div(value) {
+            resultInCalc /= value
+            return calculator
+        },
+        
+        result() {
+            return resultInCalc
+        }
+    }
+
+    return calculator
+}
+
+const result = calc(37).add(8).subtract(9).mult(2).div(7).result();
+
+console.log(result)
+
+const favorites = ['id-2']
+
+const tree = {
+    id: 'id-1',
+    name: 'Products',
+    nodes: [
+        {
+            id: 'id-2',
+            name: 'Food',
+            nodes: []
+        },
+    ],
+};
+
+function markFavorites(tree, favorites) {
+    const isFavorite = favorites.includes(tree.id)
+
+    return {
+        ...tree,
+        isFavorite,
+        nodes: tree.nodes.map(childNode => markFavorites(childNode, favorites))
+    }
+}
+const result = markFavorites(tree, favorites);
+
+console.log(result)
+
+const mult = a => b => a * b
+
+const twice = mult(2)
+
+const triple = mult(3)
+
+console.log(mult(2)(2))
+console.log(twice(7))
+console.log(triple(9))
+
+const add2 = value => value + 2;
+const square = value => value * value; 
+const half = value => value / 2;
+
+const compose = (...funcs) => value => {
+    return funcs.reduce((acc, func) => func(acc), (value))
+}
+
+const funcsCompoce = compose(add2, square, half)(2)
+
+console.log(funcsCompoce)
+
+function pinger(num, time) {
+    console.log('Ping')
+    let i = num - 1
+    setInterval(() => {
+        if (i-- > 0) {
+            console.log('Ping')
+        }
+        else {
+            clearInterval()
+        }
+    }, time)
+}
+
+pinger(5, 2000)
+
+const printing = () => {
+    console.log(1);
+    setTimeout(function() { console.log(5); }, 1000);
+    console.log(2);
+    setTimeout(function() { console.log(4); }, 0);
+    console.log(3);
+};
+
+printing()
+
+function requestUserData(userId) {
+    const promise = new Promise((resolve, reject) => {
+        if (userId === 'broken') {
+            setTimeout(() => {
+                reject(new Error('User not found'))
+            }, 500)
+        }
+        else {
+            setTimeout(() => {
+                resolve({
+                    name: 'John',
+                    age: 17,
+                    userId: userId, 
+                    email:  'userid777@example.com'
+                })
+            }, 1000)
+        }
+    })
+
+    return promise
+}
+
+requestUserData('broken')
+.then(text => console.log(text))
+.catch(error => console.log(error))
+
+const asyncCalculator = num =>
+    new Promise(resolve => {
+        setTimeout(() => {
+            console.log(`Initial value: ${num}`);
+            resolve(num);
+        }, 500);
+    })
+        .then(value => new Promise(resolve => {
+                    setTimeout(() => {
+                        const result = value * value;
+                        console.log(`Squared value: ${result}`);
+                        resolve(result);
+                    }, 500);
+                }),
+        )
+        .then(value => {
+            const result = value * 2;
+            console.log(`Doubled value: ${result}`);
+            return result;
+        });
+
+asyncCalculator(5);
+
+const asyncNum1 = 5
+
+const asyncNum3 = Promise.reject(new Error('Еб'))
+
+const asyncNum2 = 3
+
+const getSum = numbers =>
+    numbers
+        .filter(error => !isNaN(error))
+        .reduce((acc, num) => acc + num, 0)
+
+const asyncSum = (...asyncNumbers) =>
+    Promise.all(asyncNumbers)
+        .then(getSum)
 
 
+asyncSum(asyncNum1, asyncNum2, asyncNum3)
+    .then(result => console.log(result))
+    .catch(() => Promise.reject(new Error('Ебабу лох')))
+
+*/
 
