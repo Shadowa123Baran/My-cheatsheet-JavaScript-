@@ -1,6 +1,6 @@
 ![Png](https://github.com/Shadowa123Baran/My-cheatsheet/blob/main/static(2).png?raw=true)
 
-## My-cheatsheet
+## My-cheatsheet-JavaScript-
 ### Day `${I do not know}`. I am learning `${nothing}`, in this repository there are many different and interesting works collected by me during my learning.
 
 ### To make everything work, you need to enter the following commands into the terminal:
