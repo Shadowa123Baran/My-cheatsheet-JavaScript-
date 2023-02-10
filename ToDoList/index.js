@@ -1,29 +1,57 @@
-const tasks = [
-    { text: 'Buy milk', done: true },
-    { text: 'Pick up Tom from airport', done: false },
-    { text: 'Visit party', done: false },
-    { text: 'Visit doctor', done: true },
-    { text: 'Buy meat', done: true },
-];
+const inputElem = document.querySelector('.task-input')
+const btnElem = document.querySelector('.create-task-btn')
+const listElem = document.querySelector('.list')
+const titleElem = document.querySelector('.title')
 
-function renderToDoList (text) {
-    const allItems = document.querySelector('.list')
-    const bebro = text
-    .sort((a, b) => a.done - b.done)
-    .map(({text, done}) => {
-        const a = document.createElement('li')
-        a.classList.add('list__item')
-        if (done) {
-            a.classList.add('list__item_done')
-        }
-        const b = document.createElement('input')
-        b.classList.add('list__item-checkbox')
-        b.setAttribute('type', 'checkbox')
-        b.checked = done
-        a.append(b, text)
-        return a
-    })
-    allItems.append(...bebro)
+function renderToDoList() {
+
+    const inputValue = inputElem.value
+
+    if(inputValue === '') {
+        return
+    }
+
+    const finishText = `
+    <div class="beforelist__item">
+        <li onclick="doneText(event)" class="list__item">
+            <div class="before__text">
+                <div class="text">${inputValue}</div>
+            </div>
+            <button onclick="deleteTask(event)" class="btn__item">
+                ×
+            </button>
+        </li>
+    </div>
+    `
+
+    localStorage.setItem('text', finishText)
+
+    listElem.innerHTML += finishText
 }
 
-renderToDoList(tasks)
+window.addEventListener('storage', (e) => {
+    if (e.key === 'text') {
+        listElem.innerHTML += e.newValue
+    }
+
+    else{
+        return
+    }
+})
+
+function doneText(event) {
+    event.target.classList.toggle('list__item_done')
+}
+
+function deleteTask(event) {
+    const closestItem = event.target.closest('.beforelist__item')
+    closestItem.innerHTML = ''
+}
+
+
+
+btnElem.addEventListener('click', renderToDoList)
+
+
+
+
